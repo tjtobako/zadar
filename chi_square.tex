@@ -1,0 +1,69 @@
+\documentclass{article}%
+\usepackage[T1]{fontenc}%
+\usepackage[utf8]{inputenc}%
+\usepackage{lmodern}%
+\usepackage{textcomp}%
+\usepackage{lastpage}%
+\usepackage{graphicx}%
+\usepackage{amsmath}%
+%
+%
+%
+\begin{document}%
+\normalsize%
+\title{Chi-Square Test Report}%
+\renewcommand{\arraystretch}{1.5}%
+\textbf{\huge Tablica pravih vrijednosti\\}%
+\resizebox{0.4\textwidth}{!}{%%
+\begin{tabular}{|c|ccc|c|}%
+\hline%
+&a&b&c&$\Sigma$\\%
+\hline%
+a&11&22&33&66\\%
+\hline%
+b&33&22&11&66\\%
+\hline%
+$\Sigma$&44&44&44&132\\%
+\hline%
+\end{tabular}%
+}%
+\\\\\\%
+\renewcommand{\arraystretch}{1.5}%
+\textbf{\huge Tablica očekivanih vrijednosti}\\%
+\resizebox{0.4\textwidth}{!}{%%
+\begin{tabular}{|c|ccc|}%
+\hline%
+&a&b&c\\%
+\hline%
+a&22.0&22.0&22.0\\%
+\hline%
+b&22.0&22.0&22.0\\%
+\hline%
+\end{tabular}%
+}%
+\vspace{10pt}%
+\\[1em]%
+\Large $\chi^2 = \sum \frac{(PRAVE - OČEKIVANE)^2}{OČEKIVANE}$%
+\\[1em]%
+\begin{equation*}%
+\begin{aligned}%
+&=%
+ \frac{(11 - 22.0)^2}{22.0} +%
+ \frac{(22 - 22.0)^2}{22.0} +%
+ \frac{(33 - 22.0)^2}{22.0} + \\&%
+ \frac{(33 - 22.0)^2}{22.0} +%
+ \frac{(22 - 22.0)^2}{22.0} +%
+ \frac{(11 - 22.0)^2}{22.0} \\&%
+=22.0%
+\end{aligned}%
+\end{equation*}%
+\vspace{10pt}%
+\\[1em]%
+\Large Broj stupnjeva slobode jednak je $(3 - 1) \times (2 - 1)$ = 2.%
+\\%
+\Large Razina značajnosti $\alpha$ = 0.1.%
+\\%
+\Large Iz tablice iščitamo kritičnu vrijednost $\chi^2_{(0.9)}$ = 4.61.%
+\\%
+\Large Jer je $\chi^2=$22.0 > 4.61, odbacujemo nul hipotezu o jednakosti distribucija na razini značajnosti $\alpha$=0.1.%
+\end{document}
