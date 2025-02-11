@@ -3,11 +3,13 @@ from scipy.stats import chi2_contingency, chisquare, chi2
 from pylatex import Document, Tabular, NoEscape
 from pdf2image import convert_from_path
 import math
+def correct(x):
+    if x.is_integer():
+        return int(x)
+    return x
 def generate_latex_document(values, frequencies):
     doc = Document()
-    for value in values:
-        if value.is_integer():
-            value = int(value)
+    
     doc.packages.append(NoEscape(r'\usepackage{graphicx}'))  # Required for resizebox
     doc.packages.append(NoEscape(r'\usepackage{amsmath}'))
     
@@ -17,7 +19,7 @@ def generate_latex_document(values, frequencies):
     full_array = np.repeat(values,frequencies)
     mean = round(np.mean(full_array),2)
     var = round(np.var(full_array),2)
-    std_dev = math.sqrt(var)
+    std_dev = round(math.sqrt(var),2)
     # Observed Frequencies Table
     doc.append(NoEscape(r'\textbf{\huge Tablica\\}'))
     doc.append(NoEscape(r'\resizebox{0.4\textwidth}{!}{%'))  # Resize to 75% of text width
@@ -28,18 +30,36 @@ def generate_latex_document(values, frequencies):
         table.add_hline()
 
         # Table data with row sums
-        for value, freq in zip(values.astype(int),frequencies.astype(int)):
-            table.add_row([value,freq])
+        for value, freq in zip(values.astype(float),frequencies.astype(int)):
+            table.add_row([correct(value),freq])
             table.add_hline()
 
     doc.append(NoEscape(r'}'))  # Close resizebox
-    numerator_terms = ' + '.join(f'{x} \\times {f}' for x, f in zip(values, frequencies))
-    doc.append(NoEscape(r'\Large \[ \text{x} = \frac{'))
+    numerator_terms = ' + '.join(f'{f} \\times {correct(x)}' for f, x in zip(frequencies, values))
+    doc.append(NoEscape(r'\Large \[ \overline{x} = \frac{'))
     doc.append(NoEscape(numerator_terms))
     doc.append(NoEscape(r'}{'))
     denominator = ' + '.join(map(str, frequencies))
     doc.append(NoEscape(denominator))
-    doc.append(NoEscape(r'} = %s\]'% (mean)))
+    doc.append(NoEscape(r'} = %s\] \\'% (correct(mean))))
+    if len(full_array)%2==0:
+        doc.append(NoEscape(r'Medijan je $\frac{1}{2} \cdot x_{(%s)}+\frac{1}{2} \cdot x_{(%s)}=%s$ \\' % (int(len(full_array)/2),int(len(full_array)/2+1),int(np.median(full_array)))))
+    else:
+        doc.append(NoEscape(r'Medijan je $x_{(%s)}=%s$ \\' % (int((len(full_array)+1)/2),int(np.median(full_array)))))
+    
+    doc.append(NoEscape(r'\begin{align*}'))
+    doc.append(NoEscape(r'\hspace*{-\leftmargin} '))
+    numerator_terms = ' + '.join(f'{f}\\! \\cdot \\!({correct(x)}\\!-\\!{correct(mean)})^2' for f, x in zip(frequencies, values))
+    doc.append(NoEscape(r'\text{var} &= \frac{'))
+    doc.append(NoEscape(numerator_terms))
+    doc.append(NoEscape(r'}{'))
+    denominator = ' + '.join(map(str, frequencies))
+    doc.append(NoEscape(denominator))
+    doc.append(NoEscape(r'}'))
+    doc.append(NoEscape(r'\\'))
+    doc.append(NoEscape(r'&= %s'% (correct(var))))
+    doc.append(NoEscape(r'\end{align*}'))
+    doc.append(NoEscape(r'\text{std. devijacija} $= \sqrt{%s} = %s$ \\' % (correct(var), std_dev)))
     #for value,freq in zip()
     doc.generate_pdf('median', clean_tex=False)
     image = convert_from_path('median.pdf')
@@ -62,5 +82,5 @@ if __name__ == "__main__":
     print("frequencies:",freqs)
     generate_latex_document(values,freqs)
 
-    print("LaTeX document with tables generated as 'chi_square_test_report.pdf'")
+
 

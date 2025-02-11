@@ -1,6 +1,7 @@
 from scipy.stats import norm
 from pylatex import Document, Tabular, NoEscape
 from pdf2image import convert_from_path
+
 def calculate_normal_probabilities(mean, std_dev, filename):
     doc = Document()
     doc.packages.append(NoEscape(r'\usepackage{graphicx}'))  # Required for resizebox
