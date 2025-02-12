@@ -14,8 +14,6 @@ def generate_latex_document(x_values, y_values):
     doc.packages.append(NoEscape(r'\usepackage{amsmath}'))
     
     doc.append(NoEscape(r'\renewcommand{\arraystretch}{2}'))
-
-    col_labels = ["x", "frekvencije"]
     
     x_mean = round(np.mean(x_values),4)
     y_mean = round(np.mean(y_values),4)
