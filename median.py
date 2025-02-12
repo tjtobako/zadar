@@ -35,7 +35,7 @@ def generate_latex_document(values, frequencies):
             table.add_hline()
 
     doc.append(NoEscape(r'}'))  # Close resizebox
-    numerator_terms = ' + '.join(f'{f} \\times {correct(x)}' for f, x in zip(frequencies, values))
+    numerator_terms = ' + '.join(f'{f} \\cdot {correct(x)}' for f, x in zip(frequencies, values))
     doc.append(NoEscape(r'\Large \[ \overline{x} = \frac{'))
     doc.append(NoEscape(numerator_terms))
     doc.append(NoEscape(r'}{'))
@@ -49,7 +49,7 @@ def generate_latex_document(values, frequencies):
     
     doc.append(NoEscape(r'\begin{align*}'))
     doc.append(NoEscape(r'\hspace*{-\leftmargin} '))
-    numerator_terms = ' + '.join(f'{f}\\! \\cdot \\!({correct(x)}\\!-\\!{correct(mean)})^2' for f, x in zip(frequencies, values))
+    numerator_terms = '\\! + '.join(f'{f}\\! \\cdot \\!({correct(x)}\\!-\\!{correct(mean)})^2' for f, x in zip(frequencies, values))
     doc.append(NoEscape(r'\text{var} &= \frac{'))
     doc.append(NoEscape(numerator_terms))
     doc.append(NoEscape(r'}{'))

@@ -38,8 +38,8 @@ def generate_latex_document(x_values, y_values):
 
         # Column sums and Sigma symbol
         table.add_row([NoEscape(r'$\Sigma$')] + [round(np.sum(x_values),4),round(np.sum(y_values),4),
-                                                 round(np.sum(x_values-x_mean),4),
-                                                 round(np.sum(y_values-y_mean),4),
+                                                 0,
+                                                 0,
                                                  round(np.sum((x_values-x_mean)*(y_values-y_mean)),4),
                                                  round(np.sum((x_values-x_mean)**2),4),
                                                  round(np.sum((y_values-y_mean)**2),4)])
