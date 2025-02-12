@@ -1,0 +1,49 @@
+\documentclass{article}%
+\usepackage[T1]{fontenc}%
+\usepackage[utf8]{inputenc}%
+\usepackage{lmodern}%
+\usepackage{textcomp}%
+\usepackage{lastpage}%
+\usepackage{graphicx}%
+\usepackage{amsmath}%
+%
+%
+%
+\begin{document}%
+\normalsize%
+\renewcommand{\arraystretch}{2}%
+\resizebox{1.2\textwidth}{!}{%%
+\begin{tabular}{c|c|c|c|c|c|c|c|}%
+\hline%
+i&$x_i$&$y_i$&$x_i-\overline{x}$&$y_i-\overline{y}$&$(x_i-\overline{x})(y_i-\overline{y})$&$(x_i-\overline{x})^2$&$(y_i-\overline{y})^2$\\%
+\hline%
+1&4.0&0.6&{-}1.5&{-}0.5&0.75&2.25&0.25\\%
+2&5.9&1.1&0.4&0.0&0.0&0.16&0.0\\%
+3&6.6&1.6&1.1&0.5&0.55&1.21&0.25\\%
+\hline%
+$\Sigma$&16.5&3.3&0.0&{-}0.0&1.3&3.62&0.5\\%
+\hline%
+\end{tabular}%
+}\\%
+\\[1em]%
+\Large $\overline{x}=\frac{16.5}{3}=5.5$%
+\\[1em]%
+\Large $\overline{y}=\frac{3.3}{3}=1.1$%
+\\[1em]%
+\Large $Cov(x,y)=\frac{1}{n}\Sigma(x_i-\overline{x})(y_i-\overline{y})=\frac{1.3}{3}=0.4333$%
+\\[1em]%
+\Large $Var(x)=\frac{1}{n}\Sigma{(x_i-\overline{x})}^2=\frac{3.62}{3}=1.2067$%
+\\[1em]%
+\Large $Var(y)=\frac{1}{n}\Sigma{(y_i-\overline{y})}^2=\frac{0.5}{3}=0.1667$%
+\\[1em]%
+\Large $Kor(x,y)=\frac{Cov(x,y)}{\sqrt{Var(x)Var(y)}}=\frac{0.4333}{\sqrt{1.2067 \cdot 0.1667}}=0.9663$%
+\\[1em]%
+\Large $koef. regresije=\frac{Cov(x,y)}{Var(x)}=\frac{0.4333}{1.2067}=0.3591$%
+\\[1em]%
+\Large \text{jednadžba pravca:}\\%
+$y-\overline{y}=\frac{Cov(x,y)}{Var(x)}(x-\overline{x})$\\%
+\\[1em]%
+$y-1.1=0.3591(x-5.5)$\\%
+\\[1em]%
+$y=0.3591x-0.875$%
+\end{document}

@@ -12,10 +12,10 @@ print(mean_x)
 # Calculate variances
 variance_x = np.var(x, ddof=0)  # Use ddof=1 for sample variance
 print(variance_x)
-variance_y = np.var(y, ddof=0)
+variance_y = np.var(y, ddof=1)
 
 # Calculate covariance
-covariance_xy = np.cov(x, y, ddof=0)[0, 1]  # Use ddof=1 for sample covariance
+covariance_xy = np.cov(x, y, ddof=1)[0, 1]  # Use ddof=1 for sample covariance
 
 # Calculate correlation coefficient
 correlation_coefficient = np.corrcoef(x, y)[0, 1]
@@ -27,5 +27,5 @@ print(f"Averages: Mean_x = {mean_x}, Mean_y = {mean_y}")
 print(f"Variances: Variance_x = {variance_x}, Variance_y = {variance_y}")
 print(f"Covariance: Cov(x, y) = {covariance_xy}")
 print(f"Correlation Coefficient: Corr(x, y) = {correlation_coefficient}")
-print(f"Regression Coefficient: Cov(x,y)/std(x)std(y) = {slope}")
+print(f"Regression Coefficient: Cov(x,y)/var(x) = {slope}")
 print(f"Linear Regression Line: y = {slope}x + {intercept}")
