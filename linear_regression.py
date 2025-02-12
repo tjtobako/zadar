@@ -72,7 +72,8 @@ def generate_latex_document(x_values, y_values):
     else:
         doc.append(NoEscape(r'$y=%sx%s$' %(reg_coef,round(y_mean-reg_coef*x_mean,4))))
     doc.generate_pdf('linear_regression', clean_tex=False)
-
+    image = convert_from_path('linear_regression.pdf')
+    image[0].save('linear_regression.png','PNG')
 
 # Example usage
 if __name__ == "__main__":
